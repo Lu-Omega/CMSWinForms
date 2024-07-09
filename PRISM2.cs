@@ -17,6 +17,7 @@ namespace CMSWinForms
         bool sidebarExpand;
         EmployeeHomePage _employeeHomePage;
         AddEmployee _addEmployee;
+        ViewEmployees _viewEmployee;
 
         #region Instance Fields
         /*//Menu Item Groups
@@ -63,6 +64,7 @@ namespace CMSWinForms
         void InitializeMenus()
         {
             subAddEmployee.Click += (s, e) => LoadMenuItemNew(_addEmployee, typeof(AddEmployee));
+            subViewEmployees.Click += (s, e) => LoadMenuItemNew(_viewEmployee, typeof(ViewEmployees));
         }
 
 

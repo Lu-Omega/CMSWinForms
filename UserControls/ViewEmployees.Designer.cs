@@ -30,8 +30,11 @@
         {
             panel1 = new Panel();
             dataGridView1 = new DataGridView();
+            panel2 = new Panel();
+            chkEdit = new CheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -45,6 +48,8 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 0);
@@ -53,15 +58,37 @@
             dataGridView1.Size = new Size(813, 636);
             dataGridView1.TabIndex = 0;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(chkEdit);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(813, 35);
+            panel2.TabIndex = 1;
+            // 
+            // chkEdit
+            // 
+            chkEdit.AutoSize = true;
+            chkEdit.Location = new Point(3, 8);
+            chkEdit.Name = "chkEdit";
+            chkEdit.Size = new Size(100, 24);
+            chkEdit.TabIndex = 0;
+            chkEdit.Text = "Edit Mode";
+            chkEdit.UseVisualStyleBackColor = true;
+            // 
             // ViewEmployees
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ViewEmployees";
             Size = new Size(813, 636);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -69,5 +96,7 @@
 
         private Panel panel1;
         private DataGridView dataGridView1;
+        private Panel panel2;
+        private CheckBox chkEdit;
     }
 }
