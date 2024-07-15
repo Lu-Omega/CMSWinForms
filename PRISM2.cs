@@ -18,6 +18,7 @@ namespace CMSWinForms
         EmployeeHomePage _employeeHomePage;
         AddEmployee _addEmployee;
         ViewEmployees _viewEmployee;
+        DeleteEmployee _deleteEmployee;
 
         #region Instance Fields
         /*//Menu Item Groups
@@ -65,6 +66,7 @@ namespace CMSWinForms
         {
             subAddEmployee.Click += (s, e) => LoadMenuItemNew(_addEmployee, typeof(AddEmployee));
             subViewEmployees.Click += (s, e) => LoadMenuItemNew(_viewEmployee, typeof(ViewEmployees));
+            subDeleteEmployees.Click += (s, e) => LoadMenuItemNew(_deleteEmployee, typeof(DeleteEmployee));
         }
 
 

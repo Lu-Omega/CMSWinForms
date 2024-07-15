@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PRISM2));
             panel1 = new Panel();
             menuStrip1 = new MenuStrip();
             mainEmployee = new ToolStripMenuItem();
             subAddEmployee = new ToolStripMenuItem();
             subViewEmployees = new ToolStripMenuItem();
+            subDeleteEmployees = new ToolStripMenuItem();
             productsToolStripMenuItem = new ToolStripMenuItem();
             productCategoryToolStripMenuItem = new ToolStripMenuItem();
             addProductTypeToolStripMenuItem = new ToolStripMenuItem();
@@ -43,7 +45,6 @@
             productItemsToolStripMenuItem = new ToolStripMenuItem();
             suppliersToolStripMenuItem = new ToolStripMenuItem();
             panel3 = new Panel();
-            deleteEmployeesToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -72,13 +73,13 @@
             // 
             // mainEmployee
             // 
-            mainEmployee.DropDownItems.AddRange(new ToolStripItem[] { subAddEmployee, subViewEmployees, deleteEmployeesToolStripMenuItem });
+            mainEmployee.DropDownItems.AddRange(new ToolStripItem[] { subAddEmployee, subViewEmployees, subDeleteEmployees });
             mainEmployee.ForeColor = Color.White;
             mainEmployee.Image = Properties.Resources.user__2_;
             mainEmployee.ImageAlign = ContentAlignment.MiddleLeft;
             mainEmployee.Name = "mainEmployee";
             mainEmployee.Padding = new Padding(10);
-            mainEmployee.Size = new Size(118, 44);
+            mainEmployee.Size = new Size(143, 44);
             mainEmployee.Text = "Employees";
             // 
             // subAddEmployee
@@ -97,6 +98,12 @@
             subViewEmployees.Size = new Size(224, 26);
             subViewEmployees.Text = "View Employees";
             // 
+            // subDeleteEmployees
+            // 
+            subDeleteEmployees.Name = "subDeleteEmployees";
+            subDeleteEmployees.Size = new Size(224, 26);
+            subDeleteEmployees.Text = "Delete Employees";
+            // 
             // productsToolStripMenuItem
             // 
             productsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { productCategoryToolStripMenuItem, productTypeToolStripMenuItem, productItemsToolStripMenuItem });
@@ -105,14 +112,14 @@
             productsToolStripMenuItem.ImageAlign = ContentAlignment.MiddleLeft;
             productsToolStripMenuItem.Name = "productsToolStripMenuItem";
             productsToolStripMenuItem.Padding = new Padding(5, 10, 5, 10);
-            productsToolStripMenuItem.Size = new Size(118, 44);
+            productsToolStripMenuItem.Size = new Size(143, 44);
             productsToolStripMenuItem.Text = "Products";
             // 
             // productCategoryToolStripMenuItem
             // 
             productCategoryToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addProductTypeToolStripMenuItem, deleteProductCategoryToolStripMenuItem });
             productCategoryToolStripMenuItem.Name = "productCategoryToolStripMenuItem";
-            productCategoryToolStripMenuItem.Size = new Size(224, 26);
+            productCategoryToolStripMenuItem.Size = new Size(207, 26);
             productCategoryToolStripMenuItem.Text = "Product Category";
             // 
             // addProductTypeToolStripMenuItem
@@ -131,7 +138,7 @@
             // 
             productTypeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addProductTypeToolStripMenuItem1, viewProductTypeToolStripMenuItem });
             productTypeToolStripMenuItem.Name = "productTypeToolStripMenuItem";
-            productTypeToolStripMenuItem.Size = new Size(224, 26);
+            productTypeToolStripMenuItem.Size = new Size(207, 26);
             productTypeToolStripMenuItem.Text = "Product Type";
             // 
             // addProductTypeToolStripMenuItem1
@@ -149,7 +156,7 @@
             // productItemsToolStripMenuItem
             // 
             productItemsToolStripMenuItem.Name = "productItemsToolStripMenuItem";
-            productItemsToolStripMenuItem.Size = new Size(224, 26);
+            productItemsToolStripMenuItem.Size = new Size(207, 26);
             productItemsToolStripMenuItem.Text = "Product Items";
             // 
             // suppliersToolStripMenuItem
@@ -157,7 +164,7 @@
             suppliersToolStripMenuItem.ForeColor = Color.White;
             suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
             suppliersToolStripMenuItem.Padding = new Padding(5, 10, 5, 10);
-            suppliersToolStripMenuItem.Size = new Size(118, 44);
+            suppliersToolStripMenuItem.Size = new Size(143, 44);
             suppliersToolStripMenuItem.Text = "Suppliers";
             // 
             // panel3
@@ -168,12 +175,6 @@
             panel3.Size = new Size(604, 594);
             panel3.TabIndex = 1;
             // 
-            // deleteEmployeesToolStripMenuItem
-            // 
-            deleteEmployeesToolStripMenuItem.Name = "deleteEmployeesToolStripMenuItem";
-            deleteEmployeesToolStripMenuItem.Size = new Size(224, 26);
-            deleteEmployeesToolStripMenuItem.Text = "Delete Employees";
-            // 
             // PRISM2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -181,6 +182,7 @@
             ClientSize = new Size(808, 594);
             Controls.Add(panel3);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "PRISM2";
             Text = "PRISM2";
@@ -208,6 +210,6 @@
         private ToolStripMenuItem addProductTypeToolStripMenuItem1;
         private ToolStripMenuItem viewProductTypeToolStripMenuItem;
         private ToolStripMenuItem productItemsToolStripMenuItem;
-        private ToolStripMenuItem deleteEmployeesToolStripMenuItem;
+        private ToolStripMenuItem subDeleteEmployees;
     }
 }
