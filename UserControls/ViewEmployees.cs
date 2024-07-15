@@ -14,6 +14,7 @@ namespace CMSWinForms.UserControls
     public partial class ViewEmployees : UserControl
     {
         private string connectionString = "Server=Thando-LT\\SQLEXPRESS;Database=PRISM;Trusted_Connection=True;";
+        private Dictionary<int, DataGridViewRow> modifiedRows = new Dictionary<int, DataGridViewRow>();
         public ViewEmployees()
         {
             InitializeComponent();
@@ -24,12 +25,65 @@ namespace CMSWinForms.UserControls
 
         void InitializeBindings()
         {
-            ViewContacts();
-        }
 
+            ViewContacts();
+            dataGridView1.ReadOnly = true;
+            chkEdit.CheckedChanged += (s, e) =>
+            {
+                bool editModeEnabled = chkEdit.Checked;
+
+                dataGridView1.ReadOnly = !editModeEnabled;
+                dataGridView1.AllowUserToAddRows = false;
+
+                btnSave.Enabled = editModeEnabled;
+            };
+
+            dataGridView1.CellEndEdit += (s, e) =>
+            {
+                if (chkEdit.Checked)
+                {
+                    // Store the modified row for saving later
+                    int employeeId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["EmployeeId"].Value);
+                    modifiedRows[employeeId] = dataGridView1.Rows[e.RowIndex];
+
+                    // Enable the Save button
+                    btnSave.Enabled = true;
+
+
+                }
+            };
+
+            btnSave.Click += (s, e) =>
+            {
+                SaveChanges();
+            };
+            
+
+        }
+        void SaveChanges()
+        {
+            foreach (var row in modifiedRows.Values)
+            {
+                // Get updated values from the stored modified row
+                string firstName = row.Cells["FirstName"].Value.ToString();
+                string middleName = row.Cells["MiddleName"].Value.ToString();
+                string lastName = row.Cells["LastName"].Value.ToString();
+                string email = row.Cells["Email"].Value.ToString();
+                string address = row.Cells["EmployeeAddress"].Value.ToString();
+                int phoneNumber = Convert.ToInt32(row.Cells["PhoneNumber"].Value);
+                DateTime dateOfBirth = Convert.ToDateTime(row.Cells["DateOfBirth"].Value);
+                int employeeId = Convert.ToInt32(row.Cells["EmployeeId"].Value); // Ensure EmployeeId is included
+
+                // Update the record in the database
+                UpdateEmployee(employeeId, firstName, middleName, lastName, email, address, phoneNumber, dateOfBirth);
+            }
+
+            // Clear the modified rows and disable the Save button after saving
+            modifiedRows.Clear();
+        }
         void ViewContacts()
         {
-            string query = "SELECT FirstName, MiddleName, LastName, Email, EmployeeAddress, PhoneNumber, DateOfBirth from Employees";
+            string query = "SELECT EmployeeId, FirstName, MiddleName, LastName, Email, EmployeeAddress, PhoneNumber, DateOfBirth from Employees";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
@@ -39,6 +93,7 @@ namespace CMSWinForms.UserControls
                 dataGridView1.DataSource = dataTable;
 
                 // Change the header text of the columns
+                dataGridView1.Columns["EmployeeId"].HeaderText = "Employee Id";
                 dataGridView1.Columns["FirstName"].HeaderText = "First Name";
                 dataGridView1.Columns["MiddleName"].HeaderText = "Middle Name";
                 dataGridView1.Columns["LastName"].HeaderText = "Last Name";
