@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnDelete = new Button();
             txtDob = new TextBox();
             txtNumber = new TextBox();
             txtAddress = new TextBox();
@@ -43,6 +44,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnDelete);
             panel1.Controls.Add(txtDob);
             panel1.Controls.Add(txtNumber);
             panel1.Controls.Add(txtAddress);
@@ -57,6 +59,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(794, 612);
             panel1.TabIndex = 0;
+            // 
+            // btnDelete
+            // 
+            btnDelete.FlatAppearance.BorderSize = 20;
+            btnDelete.Location = new Point(30, 458);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(163, 51);
+            btnDelete.TabIndex = 9;
+            btnDelete.Text = "Delete Employee";
+            btnDelete.UseVisualStyleBackColor = true;
             // 
             // txtDob
             // 
@@ -170,5 +182,6 @@
         private TextBox txtMiddleName;
         private TextBox txtEmail;
         private TextBox txtLastName;
+        private Button btnDelete;
     }
 }

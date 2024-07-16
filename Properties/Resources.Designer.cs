@@ -103,9 +103,29 @@ namespace CMSWinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap images {
+            get {
+                object obj = ResourceManager.GetObject("images", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ionic_Ionicons_Settings_outline_24 {
             get {
                 object obj = ResourceManager.GetObject("Ionic-Ionicons-Settings-outline.24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap naruto_vs_sasuke_thor_raib {
+            get {
+                object obj = ResourceManager.GetObject("naruto-vs-sasuke-thor-raib", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

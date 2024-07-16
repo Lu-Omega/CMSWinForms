@@ -8,12 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Collections.Specialized.BitVector32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace CMSWinForms
 {
     public partial class PRISM2 : Form
     {
+        #region Constants
+        private string _connectionString;
+
+        public void SetConnectionString(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        bool _useTrainingDb = Convert.ToBoolean(0); //1 = training db
+        string _dbName = string.Empty;
+        #endregion Constants
         bool sidebarExpand;
         EmployeeHomePage _employeeHomePage;
         AddEmployee _addEmployee;
@@ -60,8 +72,25 @@ namespace CMSWinForms
         {
             //CreateMenuItems();
             InitializeMenus();
+            SetConnectionStingEtAl();
         }
+        bool SetConnectionStingEtAl()
+        {
+            //choose between live and test db
+            if (!_useTrainingDb && _dbName == "Production") //false
+            {
+                _connectionString = System.Configuration.ConfigurationManager
+                    .ConnectionStrings["PRISM"].ConnectionString;
+            }
+            else if (_useTrainingDb && _dbName == "Test") //true
+            {
+                _connectionString = System.Configuration.ConfigurationManager
+                    .ConnectionStrings["PRISM_Test"].ConnectionString;
+            }
 
+            return true;
+
+        }
         void InitializeMenus()
         {
             subAddEmployee.Click += (s, e) => LoadMenuItemNew(_addEmployee, typeof(AddEmployee));

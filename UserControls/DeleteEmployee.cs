@@ -26,6 +26,17 @@ namespace CMSWinForms.UserControls
         void InitializeBindings()
         {
             PopulateEditors();
+            btnDelete.Click += (s, e) =>
+            {
+                if(cbxEmployee.SelectedValue != null)
+                {
+                    int selectedEmployeeId = (int)cbxEmployee.SelectedValue;
+                    RemoveEmployee(selectedEmployeeId);
+                    ClearTextFields();
+                    PopulateEditors();
+                }
+                
+            };
         }
 
         void PopulateEditors()
@@ -48,6 +59,77 @@ namespace CMSWinForms.UserControls
             cbxEmployee.DataSource = dataTable;
             cbxEmployee.DisplayMember = "FirstName";
             cbxEmployee.ValueMember = "EmployeeId";
+            cbxEmployee.SelectedIndexChanged += (s, e) =>
+            {
+                if (cbxEmployee.SelectedValue != null)
+                {
+                    int selectedEmployeeId = (int)cbxEmployee.SelectedValue;
+                    PopulateEmployeeDetails(selectedEmployeeId);
+                }
+            };
+        }
+
+        void PopulateEmployeeDetails(int employeeId)
+        {
+            string employeeQuery = "SELECT FirstName, MiddleName, LastName, Email, EmployeeAddress, PhoneNumber, DateOfBirth FROM Employees WHERE EmployeeId = @EmployeeId";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(employeeQuery, conn);
+                cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        txtName.Text = reader["FirstName"].ToString();
+                        txtMiddleName.Text = reader["MiddleName"].ToString();
+                        txtLastName.Text = reader["LastName"].ToString();
+                        txtEmail.Text = reader["Email"].ToString();
+                        txtAddress.Text = reader["EmployeeAddress"].ToString();
+                        txtNumber.Text = reader["PhoneNumber"].ToString();
+                        txtDob.Text = Convert.ToDateTime(reader["DateOfBirth"]).ToString("yyyy-MM-dd");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+
+        void RemoveEmployee(int employeeId)
+        {
+            string deleteQuery = "DELETE FROM Employees WHERE EmployeeId = @EmployeeId";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Employee deleted successfully.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+
+        void ClearTextFields()
+        {
+            txtName.Text = "";
+            txtMiddleName.Text = "";
+            txtLastName.Text = "";
+            txtEmail.Text = "";
+            txtAddress.Text = "";
+            txtNumber.Text = "";
+            txtDob.Text = "";
         }
         #endregion Private Methods
     }

@@ -101,6 +101,8 @@ namespace CMSWinForms.UserControls
                 dataGridView1.Columns["EmployeeAddress"].HeaderText = "Address";
                 dataGridView1.Columns["PhoneNumber"].HeaderText = "Phone Number";
                 dataGridView1.Columns["DateOfBirth"].HeaderText = "Date of Birth";
+
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             
         }
